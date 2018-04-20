@@ -1,0 +1,16 @@
+RESULT: Using LINEAR kernel,C Equals = 0.000100,sensitivity=0.694785,specificity=0.334434,precision=0.074037,recall=0.694785,f1=0.133815
+RESULT: Using LINEAR kernel,C Equals = 0.000300,sensitivity=0.858665,specificity=0.444805,precision=0.105915,recall=0.858665,f1=0.188569
+RESULT: Using LINEAR kernel,C Equals = 0.001000,sensitivity=0.515298,specificity=0.501077,precision=0.073309,recall=0.515298,f1=0.128357
+RESULT: Using LINEAR kernel,C Equals = 0.003000,sensitivity=0.926917,specificity=0.315506,precision=0.093974,recall=0.926917,f1=0.170648
+RESULT: Using LINEAR kernel,C Equals = 0.010000,sensitivity=0.719311,specificity=0.558127,precision=0.110863,recall=0.719311,f1=0.192116
+RESULT: Using LINEAR kernel,C Equals = 0.030000,sensitivity=0.569181,specificity=0.629076,precision=0.105173,recall=0.569181,f1=0.177540
+RESULT: Using LINEAR kernel,C Equals = 0.100000,sensitivity=0.962096,specificity=0.264111,precision=0.091024,recall=0.962096,f1=0.166313
+RESULT: Using LINEAR kernel,C Equals = 0.300000,sensitivity=0.339279,specificity=0.674513,precision=0.073937,recall=0.339279,f1=0.121415
+RESULT: Using LINEAR kernel,C Equals = 1.000000,sensitivity=0.940047,specificity=0.264614,precision=0.089180,recall=0.940047,f1=0.162905
+RESULT: Using LINEAR kernel,C Equals = 3.000000,sensitivity=0.440357,specificity=0.499445,precision=0.063129,recall=0.440357,f1=0.110428
+RESULT: Using LINEAR kernel,C Equals = 10.000000,sensitivity=0.949337,specificity=0.561410,precision=0.142213,recall=0.949337,f1=0.247369
+RESULT: Using LINEAR kernel,C Equals = 30.000000,sensitivity=0.117924,specificity=0.537662,precision=0.019162,recall=0.117924,f1=0.032967
+RESULT: Using LINEAR kernel,C Equals = 100.000000,sensitivity=0.846030,specificity=0.469217,precision=0.108803,recall=0.846030,f1=0.192810
+RESULT: Using LINEAR kernel,C Equals = 300.000000,sensitivity=0.710764,specificity=0.547130,precision=0.107313,recall=0.710764,f1=0.186471
+RESULT: Using LINEAR kernel,C Equals = 1000.000000,sensitivity=0.821132,specificity=0.523051,precision=0.116505,recall=0.821132,f1=0.204057
+RESULT: Using LINEAR kernel,C Equals = 3000.000000,sensitivity=0.886783,specificity=0.311274,precision=0.089768,recall=0.886783,f1=0.163032

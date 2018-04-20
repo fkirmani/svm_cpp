@@ -1,0 +1,105 @@
+Num of identified Peptides = 8073
+Num of unidentified Peptides = 105399
+Reading support vector file STEPP_SupportVectors.txt ...
+... Completed reading support vector file STEPP_SupportVectors.txt 
+Reading file STEPP_Weights.txt ...
+... Completed reading file STEPP_Weights.txt 
+Reading file Feature_Values_MW.txt ...
+... Completed reading file Feature_Values_MW.txt 
+Reading file Feature_Values_EH.txt ...
+... Completed reading file Feature_Values_EH.txt 
+Reading file Feature_Values_HH.txt ...
+... Completed reading file Feature_Values_HH.txt 
+Reading file Feature_Values_KH.txt ...
+... Completed reading file Feature_Values_KH.txt 
+Reading file Feature_Values_RM.txt ...
+... Completed reading file Feature_Values_RM.txt 
+Reading file Feature_Values_GP.txt ...
+... Completed reading file Feature_Values_GP.txt 
+Reading file Feature_Values_ZP.txt ...
+... Completed reading file Feature_Values_ZP.txt 
+Reading file Feature_Values_BK.txt ...
+... Completed reading file Feature_Values_BK.txt 
+Reading file STEPP_NormFactor_mean.txt ...
+... Completed reading file STEPP_NormFactor_mean.txt 
+Reading file STEPP_NormFactor_std.txt ...
+... Completed reading file STEPP_NormFactor_std.txt 
+Creating amino acid vector ...
+... Created amino acid vector
+Num of identified Peptides = 1773
+Num of unidentified Peptides = 61436
+Reading support vector file STEPP_SupportVectors.txt ...
+... Completed reading support vector file STEPP_SupportVectors.txt 
+Reading file STEPP_Weights.txt ...
+... Completed reading file STEPP_Weights.txt 
+Reading file Feature_Values_MW.txt ...
+... Completed reading file Feature_Values_MW.txt 
+Reading file Feature_Values_EH.txt ...
+... Completed reading file Feature_Values_EH.txt 
+Reading file Feature_Values_HH.txt ...
+... Completed reading file Feature_Values_HH.txt 
+Reading file Feature_Values_KH.txt ...
+... Completed reading file Feature_Values_KH.txt 
+Reading file Feature_Values_RM.txt ...
+... Completed reading file Feature_Values_RM.txt 
+Reading file Feature_Values_GP.txt ...
+... Completed reading file Feature_Values_GP.txt 
+Reading file Feature_Values_ZP.txt ...
+... Completed reading file Feature_Values_ZP.txt 
+Reading file Feature_Values_BK.txt ...
+... Completed reading file Feature_Values_BK.txt 
+Reading file STEPP_NormFactor_mean.txt ...
+... Completed reading file STEPP_NormFactor_mean.txt 
+Reading file STEPP_NormFactor_std.txt ...
+... Completed reading file STEPP_NormFactor_std.txt 
+Creating amino acid vector ...
+... Created amino acid vector
+Scaling features....
+feature scaling done....
+free done
+test free done
+Using LINEAR kernel
+
+Checking svm parameters....
+.... SVM parameters found okay
+Start training...
+......*
+optimization finished, #iter = 6591
+C = 339736.691198
+obj = 512849.710207, rho = -5.491308
+nSV = 1379, nBSV = 1137
+Total nSV = 1379
+		------Confusion matrix------
+				    Predicted		
+					N			Y		
+		Act(N)		85368			20031		
+		Act(Y)		844			7229		
+
+
+sensitivity = 0.895454
+specificity = 0.809951
+
+
+precision = 0.265187
+recall = 0.895454
+f1-score = 0.409193
+accuracy = 0.816034
+sensitivity=0.895454,specificity=0.809951,precision=0.265187,recall=0.895454,f1=0.409193
+accuracy=0.816034
+		------Confusion matrix------
+				    Predicted		
+					N			Y		
+		Act(N)		61436			0		
+		Act(Y)		1772			1		
+
+
+sensitivity = 0.000564
+specificity = 1.000000
+
+
+precision = 1.000000
+recall = 0.000564
+f1-score = 0.001127
+accuracy = 0.971966
+sensitivity=0.000564,specificity=1.000000,precision=1.000000,recall=0.000564,f1=0.001127
+accuracy=0.971966
