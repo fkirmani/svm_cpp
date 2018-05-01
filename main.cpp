@@ -13,11 +13,11 @@
 #define SCALE_FEATURES 1
 #define PRINT_FEATURES 0
 #define GRID_SEARCH 0
-#define PARAM_NU 0.31
-#define PARAM_C 1e3
+#define PARAM_NU 0.57
+#define PARAM_C 7e4
 
 //Setting algorithm type
-//define VERSION UNEQUAL_WEIGHT_UNEQUAL_SAMPLES
+//#define VERSION UNEQUAL_WEIGHT_UNEQUAL_SAMPLES
 #define VERSION EQUAL_WEIGHT_EQUAL_SAMPLES
 
 //See documentation from: https://github.com/cjlin1/libsvm
@@ -353,7 +353,7 @@ int main(int argc, char **argv) {
 		double possibleCs [] = {6e5, 4e5, 2e5};
 		int length_C_tries = 4;
 
-		double possibleNUs [] = {0.26, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.40, 0.41, 0.42, 0.43, 0.44, 0.45};
+		double possibleNUs [] = {0.46,	0.47,	0.48,	0.49,	0.50,	0.51,	0.52,	0.53,	0.54,	0.55,	0.56,	0.57,	0.58,	0.59,	0.60,	0.61,	0.62,	0.63};
 		int length_nu_tries = 20;
 		int total_tries = length_C_tries;
 

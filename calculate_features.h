@@ -4,6 +4,8 @@
 #include<math.h>
 #include <float.h>
 
+#define AMINO_FEAT_TYPE 2 //2 for 2D and 3 for 3D
+
 int getNumPeptides(const char *filename) {
     FILE * fp;
     char * line = NULL;
@@ -166,6 +168,92 @@ int sum_dot(float *v1, float *v2, int len) {
 	}
 	return sum;
 }
+
+/////bond.m//////
+void get_amino_acid_wgt_mat_2D(char ***peptidesAddress, int numPeptides, double **wgt_mat_addr) {
+	char **peptides = (*peptidesAddress);
+	double *wgt_mat = (*wgt_mat_addr);
+	for (int i=0; i<numPeptides; i++) {
+		char *peptide = peptides[i];
+		int peptide_len = strlen(peptide) - 1;
+		for (int j=0; j<peptide_len-1; j++) {
+			int index_i = ((int)peptide[j]) - (96-32);
+			int index_j = ((int)peptide[j+1]) - (96-32);
+			wgt_mat[26*index_i + index_j] += 1.0;
+		}
+	}
+	double total_wgt = 0;
+	for (int i=0; i<26*26; i++) {
+		wgt_mat[i] += 2.2204e-16;
+		total_wgt += wgt_mat[i];
+	}
+	for (int i=0; i<26*26; i++) {
+		//printf("abcde %lf, %lf, %lf\n", wgt_mat[i], wgt_mat[i]/total_wgt, log(wgt_mat[i]/total_wgt));
+		wgt_mat[i] = log(wgt_mat[i]/total_wgt);
+	}
+}
+////////////////////
+/////amino_bond.m//////
+void get_amino_acid_bond_vector_2D(char ***peptidesIdentifiedAddress, 
+		char ***peptidesUnIdentifiedAddress, 
+		int numPeptidesIdentified, 
+		int numPeptidesUnIdentified, 
+		double **amino_acid_feature_vector_address) {
+	printf("Creating amino acid vector ...\n");
+	char **peptidesIdentified = (*peptidesIdentifiedAddress);
+	char **peptidesUnIdentified = (*peptidesUnIdentifiedAddress);
+	double *amino_acid_feature_vector = (*amino_acid_feature_vector_address);
+	
+	double *amino_acid_wgt_mat_identified = (double *) malloc(sizeof(double) * 26 * 26);
+	for (int i=0; i<26 * 26; i++) {
+		amino_acid_wgt_mat_identified[i] = 0.0;
+	}
+	double *amino_acid_wgt_mat_unidentified = (double *) malloc(sizeof(double) * 26 * 26);
+	for (int i=0; i<26 * 26; i++) {
+		amino_acid_wgt_mat_unidentified[i] = 0.0;
+	}
+	get_amino_acid_wgt_mat_2D(&peptidesIdentified, numPeptidesIdentified, &amino_acid_wgt_mat_identified);
+	get_amino_acid_wgt_mat_2D(&peptidesUnIdentified, numPeptidesUnIdentified, &amino_acid_wgt_mat_unidentified);
+
+	for (int i=0; i<numPeptidesIdentified; i++) {
+		double total_wgt_identified = 0.0;
+		double total_wgt_unidentified = 0.0;
+		char *peptide = peptidesIdentified[i];
+		int pep_length = strlen(peptide) - 1;
+		for (int j=0; j<pep_length-1; j++) {
+			int index_i = ((int)peptide[j]) - (96-32);
+			int index_j = ((int)peptide[j+1]) - (96-32);
+			double weight_for_identified = amino_acid_wgt_mat_identified[26*index_i + index_j ];
+			double weight_for_unidentified = amino_acid_wgt_mat_unidentified[26*index_i + index_j ];
+			total_wgt_identified += weight_for_identified;
+			total_wgt_unidentified += weight_for_unidentified;
+		}
+		//printf("i wgti=%lf, wgtj=%lf\n", total_wgt_identified, total_wgt_unidentified);
+		amino_acid_feature_vector[i]= total_wgt_identified/total_wgt_unidentified;
+	}
+	for (int i=0; i<numPeptidesUnIdentified; i++) {
+		double total_wgt_identified = 0.0;
+		double total_wgt_unidentified = 0.0;
+		char *peptide = peptidesUnIdentified[i];
+		int pep_length = strlen(peptide) - 1;
+		for (int j=0; j<pep_length-1; j++) {
+			int index_i = ((int)peptide[j]) - (96-32);
+			int index_j = ((int)peptide[j+1]) - (96-32);
+			double weight_for_identified = amino_acid_wgt_mat_identified[26*index_i + index_j ];
+			double weight_for_unidentified = amino_acid_wgt_mat_unidentified[26*index_i + index_j ];
+			total_wgt_identified += weight_for_identified;
+			total_wgt_unidentified += weight_for_unidentified;
+		}
+		//printf("wgti=%lf, wgtj=%lf\n", total_wgt_identified, total_wgt_unidentified);
+		amino_acid_feature_vector[i+numPeptidesIdentified] = total_wgt_identified/total_wgt_unidentified;
+	}
+
+	free(amino_acid_wgt_mat_identified);
+	free(amino_acid_wgt_mat_unidentified);
+	printf("... Created amino acid vector\n");
+}
+////////////////////
+
 
 /////bond_3D.m//////
 void get_amino_acid_wgt_mat(char ***peptidesAddress, int numPeptides, double **wgt_mat_addr) {
@@ -412,7 +500,12 @@ void calculate_features(float ***featureMatrix, float **y, int *numOnes, int *nu
 	
 	}
 	double *amini_acid_feature = (double *) malloc(sizeof(double) * numPeptides);
-	get_amino_acid_bond_vector(&peptides_identified, &peptides_unidentified, numPeptidesIdentified, numPeptidesUnIdentified, &amini_acid_feature);
+	if (AMINO_FEAT_TYPE == 2) {
+		get_amino_acid_bond_vector_2D(&peptides_identified, &peptides_unidentified, numPeptidesIdentified, numPeptidesUnIdentified, &amini_acid_feature);
+	} 
+	else {
+		get_amino_acid_bond_vector(&peptides_identified, &peptides_unidentified, numPeptidesIdentified, numPeptidesUnIdentified, &amini_acid_feature);
+	}
 	for (int i=0; i<numPeptides; i++) {
 		float *feature_vector = (*featureMatrix)[i];
 		feature_vector[35] = amini_acid_feature[i];
@@ -489,7 +582,7 @@ void print_features(int numPeptides, float ***featureMatrixAddress, float *y) {
 
 	for (int i=0; i<numPeptides; i++) {
 		float *featureVector = featureMatrix[i];
-		for (int j=0; j<35; j++) {
+		for (int j=0; j<36; j++) {
 			printf("%0.4f,", featureVector[j]);
 		}
 		printf("%d\n",(int) y[i]);
