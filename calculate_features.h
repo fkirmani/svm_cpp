@@ -4,7 +4,7 @@
 #include<math.h>
 #include <float.h>
 
-#define AMINO_FEAT_TYPE 2 //2 for 2D and 3 for 3D
+#define AMINO_FEAT_TYPE 3 //2 for 2D and 3 for 3D
 
 int getNumPeptides(const char *filename) {
     FILE * fp;
@@ -347,10 +347,10 @@ void calculate_features(float ***featureMatrix, float **y, int *numOnes, int *nu
 
 	char *identified_filename;
 	if (readingTest == 0) {
-		identified_filename = strdup("dataFiles/identifiedYP.txt");
+		identified_filename = strdup("dataFiles/identifiedBS50.txt");
 	}
 	else {
-		identified_filename = strdup("testFiles/identifiedEK12.txt");
+		identified_filename = strdup("testFiles/identifiedYP.txt");
 	}
 	int numPeptidesIdentified = getNumPeptides(identified_filename);
 	printf("Num of identified Peptides = %d\n", numPeptidesIdentified);
@@ -361,10 +361,10 @@ void calculate_features(float ***featureMatrix, float **y, int *numOnes, int *nu
 
 	char *unidentified_filename;
 	if (readingTest == 0) {
-		unidentified_filename = strdup("dataFiles/un_identifiedYP.txt");
+		unidentified_filename = strdup("dataFiles/un_identifiedBS50.txt");
 	}
 	else {
-		unidentified_filename = strdup("testFiles/un_identifiedEK12.txt");
+		unidentified_filename = strdup("testFiles/un_identifiedYP.txt");
 	}
 	int numPeptidesUnIdentified = getNumPeptides(unidentified_filename);
 	printf("Num of unidentified Peptides = %d\n", numPeptidesUnIdentified);
@@ -567,7 +567,7 @@ void scale_features(int numPeptides, float ***featureMatrixAddress) {
 		float *featureVector = featureMatrix[i];
 		for (int j=0; j<36; j++) {
 			if (fabs(max[j] - min[j]) > 1e-8) { //divide by zero 
-				featureVector[j] = (featureVector[j] - min[j])/(max[j] - min[j]);
+				//featureVector[j] = (featureVector[j] - min[j])/(max[j] - min[j]);
 			}
 		}
 	}

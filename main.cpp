@@ -10,15 +10,15 @@
 #define UNEQUAL_WEIGHT_UNEQUAL_SAMPLES 0
 #define EQUAL_WEIGHT_EQUAL_SAMPLES 1
 #define NUM_FOLDS 10
-#define SCALE_FEATURES 1
+#define SCALE_FEATURES 0
 #define PRINT_FEATURES 0
 #define GRID_SEARCH 0
-#define PARAM_NU 0.57
-#define PARAM_C 7e4
+#define PARAM_NU 0.31
+#define PARAM_C 5e0
 
 //Setting algorithm type
-//#define VERSION UNEQUAL_WEIGHT_UNEQUAL_SAMPLES
-#define VERSION EQUAL_WEIGHT_EQUAL_SAMPLES
+#define VERSION UNEQUAL_WEIGHT_UNEQUAL_SAMPLES
+//#define VERSION EQUAL_WEIGHT_EQUAL_SAMPLES
 
 //See documentation from: https://github.com/cjlin1/libsvm
 void convertToLibsvmFormat(float ***featureMatrixAddress, 
@@ -286,12 +286,12 @@ int main(int argc, char **argv) {
 	//For making the model, we sample some of the data
 	if (VERSION) {
 		//Sampling both identified and unidentified equally
-		keep1s = numPeptidesIdentified/4;
+		keep1s = 3*numPeptidesIdentified/4;
 		keep0s = keep1s;
 	}
 	else {
 		//Sampling unidentified in the same ratio as in the data
-		keep1s = numPeptidesIdentified/4;
+		keep1s = 3*numPeptidesIdentified/4;
 		keep0s = keep1s * ceil((numPeptidesUnIdentified*1.0)/numPeptidesIdentified);
 	}
 	convertToLibsvmFormat(&featureMatrix, &y, numPeptides, keep1s, keep0s, &prob);
