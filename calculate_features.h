@@ -347,7 +347,7 @@ void calculate_features(float ***featureMatrix, float **y, int *numOnes, int *nu
 
 	char *identified_filename;
 	if (readingTest == 0) {
-		identified_filename = strdup("dataFiles/identifiedBS50.txt");
+		identified_filename = strdup("dataFiles/identifiedYP_GPMDB.txt");
 	}
 	else {
 		identified_filename = strdup("testFiles/identifiedYP.txt");
@@ -361,7 +361,7 @@ void calculate_features(float ***featureMatrix, float **y, int *numOnes, int *nu
 
 	char *unidentified_filename;
 	if (readingTest == 0) {
-		unidentified_filename = strdup("dataFiles/un_identifiedBS50.txt");
+		unidentified_filename = strdup("dataFiles/un_identifiedYP_GPMDB.txt");
 	}
 	else {
 		unidentified_filename = strdup("testFiles/un_identifiedYP.txt");
