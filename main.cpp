@@ -11,7 +11,7 @@
 #define EQUAL_WEIGHT_EQUAL_SAMPLES 1
 #define NUM_FOLDS 10
 #define SCALE_FEATURES 0
-#define PRINT_FEATURES 0
+#define PRINT_FEATURES 1
 #define GRID_SEARCH 0
 #define PARAM_NU 0.31
 #define PARAM_C 5e0
